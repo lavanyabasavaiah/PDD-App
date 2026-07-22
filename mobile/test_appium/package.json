@@ -1,0 +1,14 @@
+{
+  "name": "vitaltrack-appium-tests",
+  "version": "1.0.0",
+  "description": "Appium and UI validation suite for VitalTrack",
+  "main": "appium_test_runner.js",
+  "scripts": {
+    "test:simulate": "node appium_test_runner.js --simulate",
+    "test:live": "node appium_test_runner.js --live",
+    "test": "node appium_test_runner.js --simulate"
+  },
+  "dependencies": {
+    "webdriverio": "^8.39.0"
+  }
+}

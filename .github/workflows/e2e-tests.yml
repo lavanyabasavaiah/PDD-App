@@ -1,4 +1,4 @@
-name: Selenium E2E Automated Testing & Excel Report CI
+name: Selenium E2E Automated Testing & GitHub Pages Deployment
 
 on:
   push:
@@ -6,9 +6,18 @@ on:
   pull_request:
     branches: [ main, master ]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   selenium-e2e-tests:
-    name: Run Selenium E2E Tests & Generate Excel Report
+    name: Run Selenium E2E Tests & Build App
     runs-on: ubuntu-latest
 
     steps:
@@ -48,3 +57,21 @@ jobs:
           name: Selenium_E2E_Test_Report_VitalTrack
           path: client/tests/reports/*.xlsx
           retention-days: 90
+
+      - name: Upload GitHub Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: client/dist
+
+  deploy-pages:
+    name: Deploy Web App to GitHub Pages
+    needs: selenium-e2e-tests
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
