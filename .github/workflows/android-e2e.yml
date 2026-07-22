@@ -45,21 +45,21 @@ jobs:
           path: mobile/test_appium/reports/*.xlsx
           retention-days: 90
 
-      - name: Prepare HTML Report Staging for gh-pages
+      - name: Build Web App & Stage Reports
         if: always()
         run: |
-          mkdir -p public_reports/reports/latest
-          mkdir -p public_reports/reports/history/build-${{ github.run_number }}
-          if [ -d "mobile/test_appium/reports" ]; then
-            cp -r mobile/test_appium/reports/* public_reports/reports/latest/ || true
-            cp -r mobile/test_appium/reports/* public_reports/reports/history/build-${{ github.run_number }}/ || true
-          fi
+          cd client
+          npm ci || npm install
+          npm run build
+          mkdir -p dist/reports/latest
+          if [ -d "tests/reports" ]; then cp -r tests/reports/* dist/reports/latest/ || true; fi
+          if [ -d "../mobile/test_appium/reports" ]; then cp -r ../mobile/test_appium/reports/* dist/reports/latest/ || true; fi
 
-      - name: Deploy HTML Reports to GitHub Pages
+      - name: Deploy Complete Web App & Reports to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         if: always()
         continue-on-error: true
         with:
-          folder: public_reports
+          folder: client/dist
           branch: gh-pages
           target-folder: .
