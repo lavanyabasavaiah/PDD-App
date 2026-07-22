@@ -1,0 +1,50 @@
+name: Selenium E2E Automated Testing & Excel Report CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  selenium-e2e-tests:
+    name: Run Selenium E2E Tests & Generate Excel Report
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install Google Chrome Headless
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Install Client Dependencies
+        run: |
+          cd client
+          npm ci || npm install
+
+      - name: Build Web Application
+        run: |
+          cd client
+          npm run build
+
+      - name: Execute Selenium E2E Test Suite (300+ Test Cases)
+        run: |
+          cd client
+          npm run test:e2e
+
+      - name: Upload Excel Test Report (.xlsx) Ready for Download
+        uses: actions/upload-artifact@v4
+        with:
+          name: Selenium_E2E_Test_Report_VitalTrack
+          path: client/tests/reports/*.xlsx
+          retention-days: 90

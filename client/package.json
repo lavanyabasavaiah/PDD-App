@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:e2e": "node tests/run_e2e_tests.cjs"
   },
   "dependencies": {
     "lucide-react": "^1.20.0",
@@ -22,7 +23,9 @@
     "eslint": "^10.3.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
+    "exceljs": "^4.4.0",
     "globals": "^17.6.0",
+    "selenium-webdriver": "^4.46.0",
     "vite": "^8.0.12"
   }
 }

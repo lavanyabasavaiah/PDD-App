@@ -6,6 +6,7 @@ server/node_modules/
 # Build output
 client/dist/
 client/dist-ssr/
+client/tests/reports/
 
 # Environment variables (sensitive - never commit)
 .env
