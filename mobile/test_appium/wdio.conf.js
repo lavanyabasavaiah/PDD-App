@@ -51,6 +51,7 @@ exports.config = {
                 test.title.includes('COMP') ? 'Compatibility' :
                 test.title.includes('PERF') ? 'Performance' :
                 test.title.includes('SEC') ? 'Security' :
+                test.title.includes('VULN') ? 'Vulnerability' :
                 test.title.includes('API') ? 'API' :
                 test.title.includes('DB') ? 'Database' :
                 test.title.includes('A11Y') ? 'Accessibility' :

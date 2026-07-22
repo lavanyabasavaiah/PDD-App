@@ -9,6 +9,7 @@ const categories = [
   { name: 'Compatibility', prefix: 'COMP', module: 'DeviceConfigs' },
   { name: 'Performance', prefix: 'PERF', module: 'MemoryAndFPS' },
   { name: 'Security', prefix: 'SEC', module: 'StorageSanitization' },
+  { name: 'Vulnerability', prefix: 'VULN', module: 'SecurityAndSanitization' },
   { name: 'API', prefix: 'API', module: 'BackendSync' },
   { name: 'Database', prefix: 'DB', module: 'SQLiteStorage' },
   { name: 'Accessibility', prefix: 'A11Y', module: 'ScreenReaderAndContrast' },
