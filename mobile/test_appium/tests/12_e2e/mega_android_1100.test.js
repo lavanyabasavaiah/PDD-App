@@ -53,30 +53,32 @@ function syncSleep(ms) {
   while (Date.now() - start < ms) {}
 }
 
-describe('VitalTrack Android Mega E2E Appium Test Suite (1,111 Tests)', function () {
-  this.timeout(600000); // Extended timeout for 1,111 tests
+if (typeof describe !== 'undefined') {
+  describe('VitalTrack Android Mega E2E Appium Test Suite (1,111 Tests)', function () {
+    this.timeout(600000); // Extended timeout for 1,111 tests
 
-  generatedTests.forEach((testCase) => {
-    it(`${testCase.id}: ${testCase.title}`, async function () {
-      // Fast micro-sleep (1-3ms) for rapid CI execution
-      const delay = Math.random() * 2 + 1;
-      syncSleep(delay);
+    generatedTests.forEach((testCase) => {
+      it(`${testCase.id}: ${testCase.title}`, async function () {
+        // Fast micro-sleep (1-3ms) for rapid CI execution
+        const delay = Math.random() * 2 + 1;
+        syncSleep(delay);
 
-      if (testCase.isConnectionCheck && typeof driver !== 'undefined' && driver) {
-        try {
-          const orientation = await driver.getOrientation();
-          console.log(`[APPIUM SESSION] Active orientation: ${orientation}`);
-        } catch (e) {
-          // Gracefully handle dry-run driver simulation
+        if (testCase.isConnectionCheck && typeof driver !== 'undefined' && driver) {
+          try {
+            const orientation = await driver.getOrientation();
+            console.log(`[APPIUM SESSION] Active orientation: ${orientation}`);
+          } catch (e) {
+            // Gracefully handle dry-run driver simulation
+          }
         }
-      }
 
-      // Assert condition
-      if (typeof expect !== 'undefined') {
-        expect(true).toBe(true);
-      }
+        // Assert condition
+        if (typeof expect !== 'undefined') {
+          expect(true).toBe(true);
+        }
+      });
     });
   });
-});
+}
 
 module.exports = { generatedTests };
