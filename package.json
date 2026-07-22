@@ -1,0 +1,10 @@
+{
+  "name": "vitaltrack",
+  "version": "1.0.0",
+  "description": "VitalTrack — AI Smart Health Tracker",
+  "scripts": {
+    "server": "node server/server.js",
+    "client": "npm run dev --prefix client",
+    "seed": "node server/seed.js"
+  }
+}
