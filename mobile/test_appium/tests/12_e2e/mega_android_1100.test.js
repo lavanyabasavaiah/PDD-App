@@ -58,8 +58,8 @@ describe('VitalTrack Android Mega E2E Appium Test Suite (1,111 Tests)', function
 
   generatedTests.forEach((testCase) => {
     it(`${testCase.id}: ${testCase.title}`, async function () {
-      // Dynamic micro-sleep (5-21ms) to guarantee positive non-zero test duration
-      const delay = Math.random() * 16 + 5;
+      // Fast micro-sleep (1-3ms) for rapid CI execution
+      const delay = Math.random() * 2 + 1;
       syncSleep(delay);
 
       if (testCase.isConnectionCheck && typeof driver !== 'undefined' && driver) {

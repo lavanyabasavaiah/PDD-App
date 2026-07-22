@@ -28,7 +28,7 @@ APPIUM_PID=$!
 
 # Wait for Appium port 4723 using curl loop
 echo "[CI SCRIPT] Waiting for Appium server to become responsive on http://127.0.0.1:4723/status..."
-MAX_ATTEMPTS=30
+MAX_ATTEMPTS=5
 ATTEMPT=0
 UNTIL_UP=false
 
@@ -39,7 +39,7 @@ while [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
     break
   fi
   ATTEMPT=$((ATTEMPT+1))
-  sleep 2
+  sleep 1
 done
 
 if [ "$UNTIL_UP" = false ]; then
