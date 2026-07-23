@@ -40,6 +40,14 @@ jobs:
         run: |
           k6 run --summary-export=summary.json server/scripts/load-test.js || true
 
-      - name: Parse Metrics & Publish Step Summary
+      - name: Parse Metrics & Generate Excel Report
         run: |
-          node server/scripts/parseK6Summary.js || true
+          node server/scripts/parseK6Summary.cjs || true
+
+      - name: Upload Excel Load Test Report (.xlsx) Ready for Download
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: K6_API_Load_Test_Report
+          path: reports/*.xlsx
+          retention-days: 90
