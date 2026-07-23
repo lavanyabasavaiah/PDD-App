@@ -1,6 +1,7 @@
 name: Backend API k6 Load Testing Pipeline
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main, master ]
     paths:
